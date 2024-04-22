@@ -19,7 +19,7 @@ git clone https://github.com/pansap99/COBRA.git
 cd COBRA
 conda env create -f environment.yml
 ```
-- Install the pose visualization toolkit by downloading the wheel file from [here](https://drive.google.com/drive/folders/19X0lsvH_9Kp5oYSjGAocoAWplpY4zkB5?usp=sharing) and running:
+- Install the pose visualization toolkit by downloading the wheel file inside the ```vis_utils``` directory from [here](https://drive.google.com/drive/folders/19X0lsvH_9Kp5oYSjGAocoAWplpY4zkB5?usp=sharing) and running:
 
 ```
 pip install pose_vis-1.0-py3-none-any.whl
