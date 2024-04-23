@@ -32,7 +32,8 @@ def transform_3D_to_2D(K, extrinsics, P3D):
 def compute_likelihood(point_3D_ref, p3d_observed, sigma=1.0, weight=1):
 
     eu_distance = np.linalg.norm(point_3D_ref - p3d_observed)
-    likelihood = 1/(mt.sqrt(2*mt.pi) * sigma) * weight * mt.exp(-0.5 * (eu_distance**2) / (sigma**2))
+    likelihood = weight * mt.exp(-0.5 * (eu_distance**2) / (sigma**2))
+    #likelihood = 1/(mt.sqrt(2*mt.pi) * sigma) * weight * mt.exp(-0.5 * (eu_distance**2) / (sigma**2))
 
     return eu_distance, likelihood
 

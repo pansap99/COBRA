@@ -42,6 +42,20 @@ This package utilizes OpenGL to render the estimated poses and overlay them into
 
 To train COBRA to represent a custom object you will need its 3D model in a ply format. You can either use ray-casting to sample points on the surface of the object or Poisson sampling. You can accomplish this by running (for Poisson sampling replace `method=ray-casting` with `method=poisson`):
 
+- If you select ray-casting as the sampling method you must also provide the arguments:
+```
+--num_ref_points=8 \
+--step=3.0
+```
+which represent the number of reference points to in ray-casting to increase coverage of the objects surface and step is the angular step to create rays from the reference points.
+- If you select ```poisson``` as your sampling method you have to provide the arguments:
+```
+--num_points_poisson=10000 \
+--random_seed=42
+```
+where the ```num_points_poisson``` is the target number of sampled points and ```random_seed``` is used for randomization.
+
+Finally, given the desired method run:
 ```
 python sample_points.py \
     --modelPath=./models/original/ \

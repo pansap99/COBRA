@@ -359,8 +359,8 @@ def ray_casting_from_centers(
     ):
         for c in range(len(centers)):
             cclass = 0
-            for phi in np.arange(0, 360, step[0]):
-                for theta in np.arange(0, 180, step[1]):
+            for phi in np.arange(0, 360, step):
+                for theta in np.arange(0, 180, step):
                     pTarget = spherical_coordinates_to_cartesian(
                         np.radians(phi), np.radians(theta), sampling_radius
                     )

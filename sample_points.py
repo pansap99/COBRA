@@ -24,12 +24,12 @@ flags.DEFINE_integer(
 )
 flags.DEFINE_integer("num_ref_points", None, "Num ref points for raycasting.")
 flags.DEFINE_string("savePath", "./centers.txt", "Txt file with the center coordinates")
-flags.DEFINE_multi_float("steps", [1.5, 1.5], "Phi, theta sampling steps")
+flags.DEFINE_float("step",1.5, "Phi, theta sampling steps")
 flags.DEFINE_integer('random_seed',42,'Random seed')
 
 
 def main(args):
-
+    
     for model in glob.glob(FLAGS.modelPath + "/*.ply"):
         reader = vtk.vtkPLYReader()
         reader.SetFileName(model)
@@ -47,7 +47,7 @@ def main(args):
                 load3DModel(model),
                 poly_data,
                 savePath=FLAGS.savePath,
-                step=FLAGS.steps,
+                step=FLAGS.step,
                 savePerClass=False,
                 mode="min",
             )
