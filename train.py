@@ -26,7 +26,7 @@ flags.DEFINE_boolean('normalize',False,'Unit sphere normalization')
 def main(args):
 
     # load points
-    points = load3DModel(jn(MODEL_PATH_TRAIN,FLAGS.model_3d+'.ply'))
+    points = load3DModel(jn(MODEL_PATH,'train',FLAGS.model_3d+'.ply'))
     np.random.shuffle(points)
 
     if FLAGS.normalize:
