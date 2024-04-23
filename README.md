@@ -148,8 +148,8 @@ python score_poses.py \
     --delta=2
 ```
 where additionally:
-- est_poses.json is a JSON file containing the estimated 6D poses
-- sigma_hat is the pd std (for details see evaluation section)
+- `est_poses.json` is a JSON file containing the estimated 6D poses
+- `sigma_hat` is the pd std (for details see evaluation section)
 
 
 
