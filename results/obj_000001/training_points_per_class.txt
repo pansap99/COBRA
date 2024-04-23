@@ -1,0 +1,10 @@
+Class 0: 1113
+Class 1: 1423
+Class 2: 1313
+Class 3: 1421
+Class 4: 1758
+Class 5: 1416
+Class 6: 1647
+Class 7: 1636
+Class 8: 1069
+Class 9: 1335

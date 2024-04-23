@@ -52,10 +52,10 @@ class COBRA:
 
         # return norm_factor * in_sum
 
-        norm_factor = 1 / (mt.sqrt(2*mt.pi) * delta**2)
+        norm_factor = 1 / delta**2
         wsum = np.sum(
             weights
-            * std_template
+            * std_template**2
             * (1 - mt.exp(-((delta**2) / (2 * std_template**2)))),
             axis=0,
         )

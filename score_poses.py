@@ -97,7 +97,7 @@ def main(args):
                                                                 RT[:3,:],
                                                                 K,
                                                                 FLAGS.sigma_hat,
-                                                                estimator_weights,
+                                                                None,
                                                                 delta=FLAGS.delta
                                                                 )
         # visualize and save results
