@@ -58,7 +58,7 @@ python train.py \
     --model_3d=model \
     --num_ref_points=8 \
     --overlap=0.05 \
-    --vis_overlap \
+    --vis_overlap
 ```
 
 where ```model``` is the name of the model inside the `./models/train` folder, ```num_ref_points``` is the number of reference points (see paper), ```overlap``` is the percentage of overlapping regions while ```vis_overlap``` visualizes overlaping regions before starting the training.
