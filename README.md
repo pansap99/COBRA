@@ -34,19 +34,19 @@ conda env create -f environment.yml
 cd vis
 pip install pose_vis-1.0-py3-none-any.whl
 ```
-This package utilizes OpenGL to render the estimated poses, overlay them into the images together with their derived confidence.
+This package utilizes OpenGL to render the estimated poses and overlay them into the images, together with their derived confidence.
 
 
 
 ## Train COBRA in custom objects
 
-To train COBRA to represent a custom object you will need it's 3D model in a ply format. You can either use ray-casting to sample points in the surface of the object or poisson sampling. You can accomplish this by running:
+To train COBRA to represent a custom object you will need its 3D model in a ply format. You can either use ray-casting to sample points on the surface of the object or Poisson sampling. You can accomplish this by running (for Poisson sampling replace `method=ray-casting` with `method=poisson`):
 
 ```
 python sample_points.py \
     --modelPath=./models/original/ \
     --savePath=./models/train/ \
-    --method=ray-casting | poisson \
+    --method=ray-casting \
     --num_points_poisson=10000 \
     --random_seed=42
 ```
@@ -82,13 +82,13 @@ model_name
 
 ## Evaluation of trained model
 
-Using again the script ```sample_points.py``` you can produce test points by chaning the random seed.
-After this you can run:
+Again, using the script ```sample_points.py``` you can produce test points by changing the random seed.
+Then, you can run:
 
 ```
 python infer.py --model_3d=model_name --vis
 ```
-where this time **model_name** is the name of the model inside the ```./models/test``` folder. This script will visualize the predicted points and print the evaluation metrics like below.
+where this time **model_name** is the name of the model inside the ```./models/test``` folder. This script will visualize the predicted points and print the evaluation metrics, as shown below.
 
 ```
 Eval metrics
@@ -103,7 +103,7 @@ where **CD** is the chamfer distance, and **pd** denotes the pairwise-distance.
 ## Method independent pose estimation scoring
 
 
-**NOTE**: You can find sample data already present in the designated folders.
+**NOTE**: You can find pre-generated data in the designated folders.
 
 To score pre-computed estimated poses with COBRA you will need to provide a file in .csv format that contains 2D-3D correspodences and the confidence output of your estimator. An example of the structure of the file can be seen below:
 
@@ -148,8 +148,8 @@ python score_poses.py \
     --delta=2
 ```
 where additionally:
-- est_poses.json is a json file containing the estimated 6D poses
-- sigma_hat is the pd std (see evaluation section)
+- est_poses.json is a JSON file containing the estimated 6D poses
+- sigma_hat is the pd std (for details see evaluation section)
 
 
 
