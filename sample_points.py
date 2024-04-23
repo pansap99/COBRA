@@ -15,7 +15,7 @@ from utils.common import *
 FLAGS = flags.FLAGS
 
 
-flags.DEFINE_string("modelPath", None, "Test model 3D")
+flags.DEFINE_string("modelPath", './models/original', "Test model 3D")
 flags.DEFINE_enum(
     "method", "poisson", ["poisson", "ray-casting"], "Method for sampling points"
 )
@@ -23,12 +23,15 @@ flags.DEFINE_integer(
     "num_points_poisson", None, "Num points to generate with poisson sampling."
 )
 flags.DEFINE_integer("num_ref_points", None, "Num ref points for raycasting.")
-flags.DEFINE_string("savePath", "./centers.txt", "Txt file with the center coordinates")
+flags.DEFINE_string("split",'train', "Train or test folder")
 flags.DEFINE_float("step",1.5, "Phi, theta sampling steps")
 flags.DEFINE_integer('random_seed',42,'Random seed')
 
 
 def main(args):
+    
+    savePath = jn(MODEL_PATH,FLAGS.split)
+    create_directory(savePath)
     
     for model in glob.glob(FLAGS.modelPath + "/*.ply"):
         reader = vtk.vtkPLYReader()
@@ -46,7 +49,7 @@ def main(args):
                 centers,
                 load3DModel(model),
                 poly_data,
-                savePath=FLAGS.savePath,
+                savePath=savePath,
                 step=FLAGS.step,
                 savePerClass=False,
                 mode="min",
@@ -54,7 +57,7 @@ def main(args):
             ppoints = np.concatenate(ppoints, axis=0)
             writePLY(
                 [tuple(point) for point in ppoints.tolist()],
-                os.path.join(FLAGS.savePath, "test.ply"),
+                os.path.join(savePath, model.split('.')[0]),
             )
             vis_points_o3d(
                 ppoints,
@@ -75,7 +78,7 @@ def main(args):
             writePLY(
                 [tuple(point) for point in points.tolist()],
                 os.path.join(
-                    FLAGS.savePath, os.path.basename(model)),
+                    savePath, os.path.basename(model)),
             )
 
 

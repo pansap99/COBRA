@@ -1,5 +1,3 @@
-MODEL_PATH_TRAIN = './models/train'
-MODEL_PATH_TEST = './models/test'
-MODEL_PATH_ORIGINAL = './models/original'
+MODEL_PATH = './models'
 RESULTS_PATH = './results'
 SCORING_PATH = './scoring'
