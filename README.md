@@ -62,7 +62,7 @@ python train.py \
     --vis
 ```
 
-where ```model``` is the name of the model inside the ./models/train folder, ```num_ref_points``` are the number of reference points (see paper), ```overlap``` is the percentage of overlapping regions while ```vis_overlap``` visualizes overlaping regions before starting the training.
+where ```model``` is the name of the model inside the `./models/train` folder, ```num_ref_points``` is the number of reference points (see paper), ```overlap``` is the percentage of overlapping regions while ```vis_overlap``` visualizes overlaping regions before starting the training.
 
 After the training is complete a folder named ```./results/model``` will be created with the above structure:
 
