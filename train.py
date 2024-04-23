@@ -21,16 +21,17 @@ flags.DEFINE_integer("num_ref_points", 5, "Nummber of reference points for clust
 flags.DEFINE_string("centers", None, "Path to custom center coordinates")
 flags.DEFINE_float("overlap", None, "Use inter-cluster overlap")
 flags.DEFINE_bool("vis_overlap", False, "Visualize overlaping regions")
-
+flags.DEFINE_boolean('normalize',False,'Unit sphere normalization')
 
 def main(args):
 
     # load points
     points = load3DModel(jn(MODEL_PATH_TRAIN,FLAGS.model_3d+'.ply'))
     np.random.shuffle(points)
-    points = points[:1000]
-    # scale to unit sphere
-    points = fitModel2UnitSphere(points, buffer=1.0 / 1.03)
+
+    if FLAGS.normalize:
+        # scale to unit sphere
+        points = fitModel2UnitSphere(points, buffer=1.0 / 1.03)
 
     create_directory(jn(RESULTS_PATH,FLAGS.model_3d.split('.')[0]))
     if FLAGS.centers is not None:

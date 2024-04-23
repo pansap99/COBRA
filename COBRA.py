@@ -32,7 +32,7 @@ def transform_3D_to_2D(K, extrinsics, P3D):
 def compute_likelihood(point_3D_ref, p3d_observed, sigma=1.0, weight=1):
 
     eu_distance = np.linalg.norm(point_3D_ref - p3d_observed)
-    likelihood = weight * mt.exp(-0.5 * (eu_distance**2) / (sigma**2))
+    likelihood = 1/(mt.sqrt(2*mt.pi) * sigma) * weight * mt.exp(-0.5 * (eu_distance**2) / (sigma**2))
 
     return eu_distance, likelihood
 
@@ -51,14 +51,13 @@ class COBRA:
 
         # return norm_factor * in_sum
 
-        norm_factor = (1 /delta**2) * std_template
+        norm_factor = 1 / (mt.sqrt(2*mt.pi) * delta**2)
         wsum = np.sum(
             weights
             * std_template
             * (1 - mt.exp(-((delta**2) / (2 * std_template**2)))),
             axis=0,
         )
-        print("CONF_LOWER_BOUND: ",norm_factor * wsum)
         return norm_factor * wsum
 
     def score_pose(
@@ -108,17 +107,14 @@ class COBRA:
             likelihoods.append(likelihood)
             distances.append(eu_distance)
 
-        # use sigma from datamean
-        sigmas_data = np.ones(len(xyz)) * sigma_hat
-
         # compute lower bound for confidence score
         conf_lower_bound = self.calc_conf_lower_bound(
             delta=delta, std_template=sigma_hat, weights=weights
         )
-
+        print(np.sum(weights))
         return (
-            np.array(likelihoods),
+            np.sum(np.array(likelihoods)) / np.sum(weights),
             np.array(distances),
-            np.array(conf_lower_bound),
+            np.array(conf_lower_bound) / np.sum(weights),
             xyz
         )

@@ -44,6 +44,7 @@ def renderPose(vertices,
                renderer,
                objID,
                conf,
+               threshold,
                resolution,
                RT,
                K,
@@ -100,13 +101,14 @@ def renderPose(vertices,
     if not rgb_image:
         mask = renderer.CaptureFramebufferScene(jn(savePath),saveRendered=True)
     else:
-        mask = renderer.CaptureFramebufferScene(jn(savePath,'test.png'),saveRendered=True)
+        mask = renderer.CaptureFramebufferScene(jn(savePath,'test.png'),saveRendered=False)
         renderer.draw2DBoundingBox(cv.imread(rgb_image).astype(np.float32),
                                    mask.astype(np.float32),
                                    str(objID),
                                    conf=conf,
                                    savePath=savePath,
                                    bb=np.array([UL,LR]).astype(int),
+                                   threshold=threshold,
                                    buildMask=False,
                                    maskFolder=None,
                                    opacity=0.6

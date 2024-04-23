@@ -2,7 +2,16 @@
 
 [Project page](link) | [arXiv](link)
 
-<!--Add overview image here -->
+
+![COBRA_splash](./splash.png)
+
+<p float="left">
+<center>
+  <img src="./demo/8.png" width="190" />
+  <img src="./demo/23.png" width="190" /> 
+  <img src="./demo/74.png" width="180" />
+</center>
+</p>
 
 ## Table of Contents
 
@@ -10,6 +19,8 @@
 - Train COBRA in custom objects
 - Evaluation of trained model
 - Score estimated poses
+
+
 
 ## Installation
 
@@ -19,11 +30,13 @@ git clone https://github.com/pansap99/COBRA.git
 cd COBRA
 conda env create -f environment.yml
 ```
-- Install the pose visualization toolkit by downloading the wheel file inside the ```vis_utils``` directory from [here](https://drive.google.com/drive/folders/19X0lsvH_9Kp5oYSjGAocoAWplpY4zkB5?usp=sharing) and running:
+- Install the pose visualization toolkit by downloading the wheel file inside the ```vis``` directory:
 
 ```
+cd vis
 pip install pose_vis-1.0-py3-none-any.whl
 ```
+This package utilizes OpenGL to render the estimated poses, overlay them into the images together with their derived confidence.
 
 
 
@@ -32,13 +45,23 @@ pip install pose_vis-1.0-py3-none-any.whl
 To train COBRA to represent a custom object you will need it's 3D model in a ply format. You can either use ray-casting to sample points in the surface of the object or poisson sampling. You can accomplish this by running:
 
 ```
-python sample_points.py --modelPath=./models/original/ --savePath=./models/train/ --method=ray-casting | poisson --num_points_poisson=10000 --random_seed=42
+python sample_points.py \
+    --modelPath=./models/original/ \
+    --savePath=./models/train/ \
+    --method=ray-casting | poisson \
+    --num_points_poisson=10000 \
+    --random_seed=42
 ```
 
 Now you can train COBRA by running:
 
 ```
-python train.py --model_3d=model --num_ref_points=8 --overlap=0.05 --vis_overlap --vis
+python train.py \
+    --model_3d=model \
+    --num_ref_points=8 \
+    --overlap=0.05 \
+    --vis_overlap \
+    --vis
 ```
 
 where ```model``` is the name of the model inside the ./models/train folder, ```num_ref_points``` are the number of reference points (see paper), ```overlap``` is the percentage of overlapping regions while ```vis_overlap``` visualizes overlaping regions before starting the training.
@@ -50,12 +73,13 @@ model_name
     │   kmeans.pkl
     │   kmeans_centers.txt
     │   training_points_per_class.txt
+    |   pcd_vis.png
     │
     └───gps
-            0.pkl
-            1.pkl
-            2.pkl
-            3.pkl
+            0.pkl.gz
+            1.pkl.gz
+            2.pkl.gz
+            3.pkl.gz
 ```
 
 ## Evaluation of trained model
@@ -79,6 +103,9 @@ Eval metrics
 where **CD** is the chamfer distance, and **pd** denotes the pairwise-distance.
 
 ## Method independent pose estimation scoring
+
+
+**NOTE**: You can find sample data already present in the designated folders.
 
 To score pre-computed estimated poses with COBRA you will need to provide a file in .csv format that contains 2D-3D correspodences and the confidence output of your estimator. An example of the structure of the file can be seen below:
 
@@ -118,12 +145,9 @@ where:
 Finally, run:
 ```
 python score_poses.py \                                                                     
-    --K=./scoring/K.txt \
-    --est_poses=./scoring/est_poses.json \
-    --kmeans=./results/stable/kmeans.pkl \
-    --savedModel=./results/stable/ \
-    --model_3d='./models/original/obj_000001.ply' \
-    --sigma_hat=1.93
+    --model_3d=obj_000001 \
+    --sigma_hat=1.93 \
+    --delta=2
 ```
 where additionally:
 - est_poses.json is a json file containing the estimated 6D poses

@@ -24,6 +24,7 @@ FLAGS = flags.FLAGS
 
 flags.DEFINE_bool("vis", False, "Visualize gp output or not")
 flags.DEFINE_string("model_3d", None, "Test model 3D")
+flags.DEFINE_boolean('normalize',False,'Unit sphere normalization')
 
 
 def main(args):
@@ -32,8 +33,9 @@ def main(args):
     points = load3DModel(jn(MODEL_PATH_TEST,FLAGS.model_3d+'.ply'))
     np.random.shuffle(points)
 
-    # scale to unit sphere
-    #points = fitModel2UnitSphere(points, buffer=1.03)
+    if FLAGS.normalize:
+        # scale to unit sphere
+        points = fitModel2UnitSphere(points, buffer=1.03)
 
     # load the fitted kmeans centers
     with open(jn(RESULTS_PATH,FLAGS.model_3d,'kmeans.pkl'), "rb") as f:
@@ -56,7 +58,7 @@ def main(args):
     export_3D_points(xyz, jn(RESULTS_PATH,FLAGS.model_3d,"out_points.txt"))
 
     if FLAGS.vis:
-        vis_pcd_open3D(xyz, jn(RESULTS_PATH,"./test.png"))
+        vis_pcd_open3D(xyz, jn(RESULTS_PATH,FLAGS.model_3d,"./pcd_vis.png"))
 
 
 if __name__ == "__main__":

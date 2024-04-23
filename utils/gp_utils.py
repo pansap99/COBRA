@@ -12,6 +12,7 @@ from utils.io import create_directory
 import vtk
 from rich.table import Table
 from typing import Literal
+import gzip
 from utils.model_3D import writePLY, clustering_decimation, load3DModel
 
 import time
@@ -497,8 +498,8 @@ class ClusteredGPs:
         # get global kernel params
         create_directory(os.path.join(path, "gps"))
         for idx, gp in enumerate(self.gps):
-            with open(os.path.join(path, "gps", f"{idx}.pkl"), "wb") as f:
-                print(f"Saving gp_{idx}_params.pkl")
+            with gzip.open(os.path.join(path, "gps", f"{idx}.pkl.gz"), "wb") as f:
+                print(f"Saving gp_{idx}_params.pkl.gz")
                 pickle.dump(gp, f)
         with open(os.path.join(path, "training_points_per_class.txt"), "w") as f:
             for cls in range(len(self.centers)):
@@ -508,8 +509,8 @@ class ClusteredGPs:
     def __load__(self, path):
 
         for i in range(0, len(self.centers)):
-            filename = os.path.join(path, f"gps/{i}.pkl")
-            with open(filename, "rb") as f:
+            filename = os.path.join(path, f"gps/{i}.pkl.gz")
+            with gzip.open(filename, "rb") as f:
                 print(f"Loading {filename}...")
                 self.gps.append(pickle.load(f))
 
