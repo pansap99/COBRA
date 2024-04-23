@@ -5,12 +5,10 @@
 
 ![COBRA_splash](./splash.png)
 
-<p float="left">
-<center>
+<p align="center">
   <img src="./demo/8.png" width="190" />
   <img src="./demo/23.png" width="190" /> 
   <img src="./demo/74.png" width="180" />
-</center>
 </p>
 
 ## Table of Contents
