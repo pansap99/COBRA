@@ -6,7 +6,7 @@
 [Panagiotis Sapoutzoglou<sup>1,2</sup>](https://www.linkedin.com/in/panagiotis-sapoutzoglou-66984a201/), [Georgios Giapitzakis Tzintanos<sup>1</sup>](), [George
 Terzakis<sup>2</sup>](), [Maria Pateraki<sup>1,2</sup>](http://www.mpateraki.org/)
 
-[<sup>1</sup>National Technical University of Athens](https://ntua.gr/en/), Athens, Greece,
+[<sup>1</sup>National Technical University of Athens](https://ntua.gr/en/), Athens, Greece <br>
 [<sup>2</sup>Institute of Communication & Computer Systems](https://www.iccs.gr/en/), Athens, Greece
 
 ![COBRA_splash](./splash.png)
