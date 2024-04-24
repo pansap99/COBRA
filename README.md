@@ -9,7 +9,7 @@
 <p align="center">
     <img src="./demo/61.png" width="190" />
     <img src="./demo/482.png" width="190" />
-    <img src="./demo/74.png" width="180" /> 
+    <img src="./demo/74.png" width="190" /> 
     <img src="./demo/289.png" width="190" />
 </p>
 
