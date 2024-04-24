@@ -1,4 +1,4 @@
-# COBRA - COnfidence score Based on shape Regression Analysis for method-independent quality assesment of object pose estimation from single images
+# COBRA - COnfidence score Based on shape Regression Analysis for method-independent quality assessment of object pose estimation from single images
 
 <!--Project page](link)-->
 **[arXiv](link)**
