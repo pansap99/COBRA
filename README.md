@@ -3,7 +3,7 @@
 <!--Project page](link)-->
 **[arXiv](link)**
 
-[Panagiotis Sapoutzoglou<sup>1,2</sup>](https://www.linkedin.com/in/panagiotis-sapoutzoglou-66984a201/), [Georgios Giapitzakis Tzintanos<sup>1</sup>](), [George
+[Panagiotis Sapoutzoglou<sup>1,2</sup>](https://www.linkedin.com/in/panagiotis-sapoutzoglou-66984a201/), [Georgios Giapitzakis Tzintanos<sup>1</sup>](https://github.com/giorgosgiapis), [George
 Terzakis<sup>2</sup>](), [Maria Pateraki<sup>1,2</sup>](http://www.mpateraki.org/)
 
 [<sup>1</sup>National Technical University of Athens](https://ntua.gr/en/), Athens, Greece <br>
