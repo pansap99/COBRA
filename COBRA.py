@@ -97,7 +97,7 @@ class COBRA:
 
         # if weights are not provided default to 1/N
         if weights is None:
-            weights = np.ones((len(xyz))) * (1/len(xyz))
+            weights = np.ones((len(xyz)))
         # compute the likelihood for each point
         for idx, (xyz_, xyz_ob) in enumerate(zip(xyz, back_proj_3D[sorted_indices])):
             
@@ -112,10 +112,10 @@ class COBRA:
         conf_lower_bound = self.calc_conf_lower_bound(
             delta=delta, std_template=sigma_hat, weights=weights
         )
-        print(np.sum(weights))
+        
         return (
-            np.sum(np.array(likelihoods)) / np.sum(weights),
+            np.sum(np.array(likelihoods)) / len(weights),
             np.array(distances),
-            np.array(conf_lower_bound) / np.sum(weights),
+            np.array(conf_lower_bound) / len(weights),
             xyz
         )

@@ -89,9 +89,6 @@ def renderPose(vertices,
     uniform_vars["lightPos"]["value"] = [lightPos[0],lightPos[1],lightPos[2]]
     uniform_vars["viewPos"]["value"] = [-RT[0,-1], -RT[1,-1], -RT[2,-1]]
 
-    print(uniform_vars["lightPos"]["value"])
-    print(uniform_vars["viewPos"]["value"])
-
     renderer.setUniformVariables(renderer.shader_programm,uniform_vars)
     glBindVertexArray(renderer.VAO)
     glDrawElements(GL_TRIANGLES, len(indices), GL_UNSIGNED_INT, None)

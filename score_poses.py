@@ -52,14 +52,13 @@ def main(args):
     renderer.load_shaders("./vis/shaders/basic_lighting_vrt.txt",
                         "./vis/shaders/basic_lighting.txt",
                         None)
-    vertices, indices = load_model(jn(MODEL_PATH_ORIGINAL,FLAGS.model_3d)+'.ply')
+    vertices, indices = load_model(jn(MODEL_PATH,'original',FLAGS.model_3d)+'.ply')
     renderer.create_data_buffers(vertices,indices,attrs=[2,3,4])
     renderer.CreateFramebuffer(GL_RGB32F,GL_RGBA,GL_FLOAT)
 
 
     # get all corr files present in the corrs folder
     corrs = sorted(glob.glob(jn(SCORING_PATH,'corr')+"/*corr"))
-    #print(corrs)
     
     data = {}
     distances_out = []
@@ -70,7 +69,6 @@ def main(args):
         
         renderer.glConfig()
         corr = jn(SCORING_PATH,FLAGS.model_3d,'corrs',str(int(os.path.basename(img).split(".")[0]))+"_corr.txt")
-        print(f"Reding from {corr}")
         
         # load the corr file into a pandas dataframe
         corr_df = loadEstimatorResults(corr)
@@ -89,8 +87,11 @@ def main(args):
         # extract the 2D and 3D points
         points_3D = np.column_stack((corr_df['X'],corr_df['Y'],corr_df['Z']))
         points_2D = np.column_stack((corr_df['x'],corr_df['y']))
-        estimator_weights = corr_df['conf']
-        print(estimator_weights.mean())
+        if 'conf' in corr_df.columns:
+            estimator_weights = corr_df['conf']
+        else:
+            estimator_weights = None
+
         # compute COBRA confidence score
         likelihood,distances,conf_lower_bound,xyz = cobra.score_pose(points_2D,
                                                                 points_3D,

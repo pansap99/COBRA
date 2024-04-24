@@ -1,20 +1,35 @@
 # COBRA - COnfidence score Based on shape Regression Analysis for method-independent quality assesment of object pose estimation from single images
 
-[Project page](link) | [arXiv](link)
+<!--Project page](link)-->
+[arXiv](link)
 
 
 ![COBRA_splash](./splash.png)
 
 <p align="center">
-  <img src="./demo/8.png" width="190" />
-  <img src="./demo/23.png" width="190" /> 
-  <img src="./demo/74.png" width="180" />
+    <img src="./demo/61.png" width="190" />
+    <img src="./demo/482.png" width="190" />
+    <img src="./demo/74.png" width="180" /> 
+    <img src="./demo/289.png" width="190" />
 </p>
+
+## Abstract
+
+We present a generic algorithm for scoring pose estimation methods that rely on single image semantic analysis. The algorithm employs a lightweight putative shape representation using a combination of multiple Gaussian Processes. Each Gaussian Process (GP) yields distance normal distributions from multiple reference points in the object's coordinate system to its surface, thus providing a geometric evaluation framework for scoring predicted poses. Our confidence measure comprises the average mixture probability of pixel back-projections onto the shape template. In the reported experiments, we compare the accuracy of our GP based representation of objects versus the actual geometric models and demonstrate the ability of our method to capture the influence of outliers as opposed to the corresponding intrinsic measures that ship with the segmentation and pose estimation methods.
+
+## Overview
+
+The core functionality of this repo can be summarized in five steps:
+- Installation: Set up the Conda environment and install dependencies using the provided instructions.
+- Sample points from a 3D model to serve as the training and test sets. This is done by utilizing the script ```sample_points.py```.
+- Train COBRA to represent the shape of the object. This is done by running the ```train.py``` script.
+- Evaluate the trained model over test points and compute accuracy metrics (```infer.py```).
+- Use the trained model to score estimated poses pre-computed from an independent pose estimation algorithm (```core_poses.py```).
 
 ## Table of Contents
 
 - Installation / Environment setup
-- Train COBRA in custom objects
+- Train COBRA for custom objects
 - Evaluation of trained model
 - Score estimated poses
 
@@ -40,6 +55,8 @@ This package utilizes OpenGL to render the estimated poses and overlay them into
 
 ## Train COBRA for custom objects
 
+### Sample training/test points
+
 To train COBRA to represent a custom object you will need its 3D model in a ply format. You can either use ray-casting to sample points on the surface of the object or Poisson sampling:
 
 - If you select ```ray-casting``` as the sampling method you must also provide the arguments:
@@ -64,6 +81,7 @@ python sample_points.py \
 
 where the ```num_points_poisson``` is the target number of sampled points and ```random_seed``` is used for randomization.
 
+### Training
 Finally, you can train COBRA by running:
 
 ```
@@ -76,7 +94,7 @@ python train.py \
 
 where ```model``` is the name of the model inside the `./models/train` folder, ```num_ref_points``` is the number of reference points (see paper), ```overlap``` is the percentage of overlapping regions while ```vis_overlap``` visualizes overlaping regions before starting the training.
 
-After the training is complete a folder named ```./results/model``` will be created with the above structure:
+After the training is complete a folder named ```./results/model``` will be created with the below structure:
 
 ```
 model_name
