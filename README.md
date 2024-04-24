@@ -1,16 +1,21 @@
 # COBRA - COnfidence score Based on shape Regression Analysis for method-independent quality assesment of object pose estimation from single images
 
 <!--Project page](link)-->
-[arXiv](link)
+**[arXiv](link)**
 
+[Panagiotis Sapoutzoglou<sup>1,2</sup>](https://www.linkedin.com/in/panagiotis-sapoutzoglou-66984a201/), [Georgios Giapitzakis Tzintanos<sup>1</sup>](), [George
+Terzakis<sup>2</sup>](), [Maria Pateraki<sup>1,2</sup>](http://www.mpateraki.org/)
+
+[<sup>1</sup>National Technical University of Athens](https://ntua.gr/en/), Athens, Greece,
+[<sup>2</sup>Institute of Communication & Computer Systems](https://www.iccs.gr/en/), Athens, Greece
 
 ![COBRA_splash](./splash.png)
 
 <p align="center">
     <img src="./demo/61.png" width="190" />
-    <img src="./demo/482.png" width="190" />
-    <img src="./demo/74.png" width="190" /> 
-    <img src="./demo/289.png" width="190" />
+    <img src="./demo/433.png" width="190" />
+    <img src="./demo/292.png" width="190" /> 
+    <img src="./demo/74.png" width="190" />
 </p>
 
 ## Abstract
@@ -24,14 +29,14 @@ The core functionality of this repo can be summarized in five steps:
 - Sample points from a 3D model to serve as the training and test sets. This is done by utilizing the script ```sample_points.py```.
 - Train COBRA to represent the shape of the object. This is done by running the ```train.py``` script.
 - Evaluate the trained model over test points and compute accuracy metrics (```infer.py```).
-- Use the trained model to score estimated poses pre-computed from an independent pose estimation algorithm (```core_poses.py```).
+- Use the trained model to score estimated poses pre-computed from an independent pose estimation algorithm (```score_poses.py```).
 
 ## Table of Contents
 
-- Installation / Environment setup
-- Train COBRA for custom objects
-- Evaluation of trained model
-- Score estimated poses
+- [Installation / Environment setup](#installation)
+- [Train COBRA for custom objects](#train-cobra-for-custom-objects)
+- [Evaluation of trained model](#evaluation-of-trained-model)
+- [Score estimated poses](#method-independent-pose-estimation-scoring)
 
 
 
@@ -51,7 +56,8 @@ pip install pose_vis-1.0-py3-none-any.whl
 ```
 This package utilizes OpenGL to render the estimated poses and overlay them into the images, together with their derived confidence.
 
-
+**NOTE**: If you encounter an error similar to this one: ```libGL error: MESA-LOADER: failed to open iris``` you can try to resolve it by running :
+```export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6```
 
 ## Train COBRA for custom objects
 

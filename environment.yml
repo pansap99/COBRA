@@ -1,4 +1,4 @@
-name: cobra_test
+name: cobra
 channels:
   - defaults
 dependencies:
@@ -101,4 +101,4 @@ dependencies:
       - werkzeug==3.0.2
       - widgetsnbextension==4.0.10
       - zipp==3.18.1
-prefix: /home/panos/anaconda3/envs/cobra_test
+prefix: /home/panos/anaconda3/envs/cobra
