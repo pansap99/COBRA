@@ -1,7 +1,7 @@
 # COBRA - COnfidence score Based on shape Regression Analysis for method-independent quality assessment of object pose estimation from single images
 
 <!--Project page](link)-->
-**[arXiv](link)**
+**[arXiv](https://arxiv.org/abs/2404.16471)**
 
 [Panagiotis Sapoutzoglou<sup>1,2</sup>](https://www.linkedin.com/in/panagiotis-sapoutzoglou-66984a201/), [Georgios Giapitzakis Tzintanos<sup>1</sup>](https://github.com/giorgosgiapis), [George
 Terzakis<sup>2</sup>](https://github.com/terzakig), [Maria Pateraki<sup>1,2</sup>](http://www.mpateraki.org/)
